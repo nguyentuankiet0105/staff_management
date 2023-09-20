@@ -1,7 +1,10 @@
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Flex, Button, Center } from '@chakra-ui/react'
+import ReactPaginate from 'react-paginate';
 
 type TProps = {
- data: TTable[]
+ data: TTable[],
+ totalPages: number,
+ handlePageClick: (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
 }
 
 type TTable = {
@@ -13,10 +16,11 @@ type TTable = {
 
 
 const TableCustom = (props: TProps) => {
- const { data } = props
+ const { data, totalPages, handlePageClick } = props
+
  return (
   <>
-   <TableContainer w="850px">
+   <TableContainer w="850px" mb="20px">
     <Table variant='striped' size='lg'>
      <Thead>
       <Tr>
@@ -47,6 +51,28 @@ const TableCustom = (props: TProps) => {
      </Tbody>
     </Table>
    </TableContainer>
+   <div className="pagination" style={{justifyContent: 'center'}}>
+    <ReactPaginate
+     breakLabel="..."
+     nextLabel="next >"
+     onPageChange={handlePageClick}
+     pageRangeDisplayed={5}
+     pageCount={totalPages}
+     previousLabel="< previous"
+     renderOnZeroPageCount={null}
+
+     pageClassName="page-item"
+     pageLinkClassName="page-link"
+     previousClassName="page-item"
+     previousLinkClassName="page-link"
+     nextClassName="page-item"
+     nextLinkClassName="page-link"
+     breakClassName="page-item"
+     breakLinkClassName="page-link"
+     containerClassName="pagination"
+     activeClassName="active"
+    />
+   </div>
   </>
  )
 }

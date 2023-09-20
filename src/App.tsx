@@ -6,22 +6,30 @@ import { fetchAllUser } from './services/UserService'
 
 const App = () => {
   const [listUser, setListUser] = useState([])
+  const [pagination, setPagination] = useState({
+    totalPages: null,
+  })
 
   useEffect(() => {
-    getUser()
+    getUser(1)
   }, [])
 
-  const getUser = async () => {
-    const res = await fetchAllUser()
+  const getUser = async (page: number) => {
+    const res = await fetchAllUser(page)
     if (res && res.data) {
       setListUser(res.data)
+      setPagination({ totalPages: res.total_pages })
     }
+  }
+
+  const handlePageClick = (e) => {
+    getUser(Number(e.selected) + 1)
   }
 
   return (
     <>
       <Form />
-      <Table data={listUser} />
+      <Table data={listUser} totalPages={pagination.totalPages} handlePageClick={handlePageClick} />
     </>
   )
 }
