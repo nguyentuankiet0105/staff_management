@@ -1,26 +1,27 @@
 import './App.css'
 import Table from './components/Table'
 import Form from './components/Form'
+import { useEffect, useState } from 'react'
+import { fetchAllUser } from './services/UserService'
 
-const data = [
-  {
-    no: 1,
-    id: 2,
-    username: "string",
-    role: "string"
-  },
-  {
-    no: 2,
-    id: 3,
-    username: "string",
-    role: "string"
+const App = () => {
+  const [listUser, setListUser] = useState([])
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  const getUser = async () => {
+    const res = await fetchAllUser()
+    if (res && res.data) {
+      setListUser(res.data)
+    }
   }
-]
-function App() {
+
   return (
     <>
-      <Form/>
-      <Table data={data} />
+      <Form />
+      <Table data={listUser} />
     </>
   )
 }

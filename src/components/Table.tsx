@@ -5,10 +5,10 @@ type TProps = {
 }
 
 type TTable = {
- no: number,
  id: number,
- username: string,
- role: string
+ email: string,
+ first_name: string,
+ last_name: string,
 }
 
 
@@ -20,20 +20,20 @@ const TableCustom = (props: TProps) => {
     <Table variant='striped' size='lg'>
      <Thead>
       <Tr>
-       <Th isNumeric ><Center>No</Center></Th>
-       <Th><Center>Id</Center></Th>
-       <Th><Center>Username</Center></Th>
-       <Th><Center>Role</Center></Th>
+       <Th isNumeric><Center>Id</Center></Th>
+       <Th><Center>email</Center></Th>
+       <Th><Center>firstname</Center></Th>
+       <Th><Center>lastname</Center></Th>
        <Th><Center>Action</Center></Th>
       </Tr>
      </Thead>
      <Tbody>
       {data.map(item => (
-       <Tr>
-        <Td isNumeric ><Center>{item.no}</Center></Td>
+       <Tr key={item.id}>
         <Td><Center>{item.id}</Center></Td>
-        <Td><Center>{item.username}</Center></Td>
-        <Td><Center>{item.role}</Center></Td>
+        <Td><Center>{item.email}</Center></Td>
+        <Td><Center>{item.first_name}</Center></Td>
+        <Td><Center>{item.last_name}</Center></Td>
         <Td>
          <Center>
           <Flex gap="10px">
