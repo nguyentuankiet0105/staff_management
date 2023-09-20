@@ -4,45 +4,27 @@ import {
  Input,
  Button,
 } from '@chakra-ui/react'
-import { useState } from 'react'
-import Select from './Select'
-import { formVariables } from '../constant/form.variables'
 
-const FormCustom = () => {
- const [formData, setFormData] = useState({
-  id: null,
-  username: '',
-  role: null
- })
+type TProps = {
+ handleSubmit: (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
+ handleChange: (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
+}
 
- const handleChange = (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement | HTMLInputElement>): void => {
-  setFormData((pre) => ({
-   ...pre,
-   [e.target.name]: e.target.value
-  }))
- }
- const handleSubmit = (e: React.FocusEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-  e.preventDefault();
-  console.log(formData);
- }
+const FormCustom = (props: TProps) => {
+ const { handleSubmit, handleChange } = props
 
 
  return (
   <>
    <form onSubmit={handleSubmit}>
     <FormControl isRequired className="form-content">
-     <FormLabel>Id</FormLabel>
-     <Input name="id" placeholder='Id' onChange={handleChange} />
+     <FormLabel>Name</FormLabel>
+     <Input name="name" placeholder='name' onChange={handleChange} />
     </FormControl>
 
     <FormControl isRequired className="form-content">
-     <FormLabel>Username</FormLabel>
-     <Input name="username" placeholder='username' onChange={handleChange} />
-    </FormControl>
-
-    <FormControl isRequired className="form-content">
-     <FormLabel>Role</FormLabel>
-     <Select name="role" options={formVariables.OPTION_SELECT} onChange={handleChange} />
+     <FormLabel>Job</FormLabel>
+     <Input name="job" placeholder='job' onChange={handleChange} />
     </FormControl>
 
     <Button
